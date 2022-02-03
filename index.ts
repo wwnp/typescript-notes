@@ -3,7 +3,6 @@ let str: string; // Аннотация
 str = 'abc'
 // str = 1
 
-
 // Аннотация нужна:
 // 1 Когда функция возвращает тип any и надо уточнить значение
 let x: number = JSON.parse('6');
@@ -25,18 +24,17 @@ let myScore: number | string; // union
 myScore = 5
 
 //------------------------------------------------
-
-// arr , tuple
+// ARR , TUPLE
 // in arr all els have one type; any length 
-const arr: string[] = ['a', 'b', 'c', 1]; // els in arr must be string
-arr.push(5)
+const arr: string[] = ['a', 'b', 'c', 1]; // els in arr should be string
+arr.push(5) //err
 
-const arr1: Array<number> = [1, 4, 'abc']
-arr1.push('123')
+const arr1: Array<number> = [1, 4, 'abc'] //err
+arr1.push('123') //err
 
 const arr2: string[][] = [] // только массивы в массиве
 arr2.push(['1'])
-arr2.push('123')
+arr2.push('123') //err
 
 const arr3: (string | number)[] = []
 
@@ -46,11 +44,11 @@ const arr4: MyType[] = []
 // in tuple all els have differen type; fixed length
 const tuple1: [string, boolean, number] = ['abc', true, 5]
 
-const tuple2: [string, boolean, number] = [true, 5, 5]
-//csv
+const tuple2: [string, boolean, number] = [true, 5, 5] //err
+//csv 
 type SimpleCSV = [string, string, number]
 const example: SimpleCSV[] = [
-  ['str', 'stasd', 32]
+  ['str', 'stasd', 32] 
 ]
 
 //OBJECT
@@ -82,11 +80,9 @@ interface MyObject {
   print2: () => string // old method
   [key: string]: string | number | Function // сколько хочешь ключ-значение
 }
-const obj3: MyObject = { a: 1, c: "str", d: '1123', e: 'dqweqwe' }
-const obj4: MyObject = { a: 1, c: '123', e: 'dqweqwe', 'sex':'123' }
+const obj3: MyObject = { a: 1, c: "str", d: '1123', e: 'dqweqwe' } //err
+const obj4: MyObject = { a: 1, c: '123', e: 'dqweqwe', 'sex': '123' } //err
 obj3.e = 5 //err
-
-
 
 
 
@@ -100,16 +96,14 @@ interface Todo {
   title: string
   completed: boolean
 } // уточнить типы
-
 axios.get(url).then(response => {
   const todo = response.data as Todo
   const id = todo.id
   const title = todo.title
   const finished = todo.completed
-  logTodo(id,title,finished)
+  logTodo(id, title, finished)
 })
-
-function logTodo(id:number,title:string,finished:boolean){
+function logTodo(id: number, title: string, finished: boolean) {
   console.log(`
     TODO ID ${id}
     TODO title ${title}
